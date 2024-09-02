@@ -4,6 +4,7 @@ import notFound from "./middleware/notFound.js";
 import company from "./routes/company.js";
 import order from "./routes/order.js";
 import users from "./routes/users.js";
+import admin from "./routes/admin.js";
 
 const port = 8000;
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/company", company);
 app.use("/api/order", order);
 app.use("/api/users", users);
+app.use("/api/admin", admin);
 
 // Middlewares
 app.use(notFound);

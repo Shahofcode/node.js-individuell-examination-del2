@@ -176,3 +176,100 @@ Will give the user this response:
 ]
 }
 ```
+
+### Admin - add product:
+http://localhost:8000/api/admin/product/add
+Method: POST
+
+Go to the "Body" tab (in Postman or Insomnia).
+Select "JSON" as the format.
+Paste your JSON structure into the json field.
+
+Example of JSON structure for adding product:
+```json
+{
+"title": "Some product",
+"desc": "Some description",
+"price": 5
+}
+```
+Will give the user this response:
+```json
+{
+"message": "Product added.",
+"product": {
+"_id": 1,
+"title": "Some product",
+"desc": "Some description",
+"price": 5,
+"createdAt": 1725213423000,
+"modifiedAt": 1725213423000
+}
+}
+```
+
+###  Admin - update product:
+http://localhost:8000/api/admin/product/update 
+Method: PATCH  
+
+Go to the "Body" tab (in Postman or Insomnia).
+Select "JSON" as the format.
+Paste your JSON structure into the json field.
+
+Example of JSON structure for updating products:
+```json
+{
+"_id": 1,
+"title": "Some other product"
+}
+```
+Will give the user this response:
+```json
+{
+"updateStatus": true
+}
+```
+
+\*Any product field (title, desc, price) could be changed with this request. Returns updateStatus: false with HTTP statuscode 404 if an invalid is was sent.
+
+###  Admin - delete product:
+http://localhost:8000/api/admin/product/delete/:productId
+Method: DELETE  
+
+Will give the user this response:
+```json
+{
+"deleteStatus": true
+}
+```
+
+\*Returns deleteStatus: false with HTTP statuscode 404 if an invalid id was sent.
+
+###  Admin - add campaign offer:
+http://localhost:8000/api/admin/campaignOffer/add
+Method: POST
+
+Go to the "Body" tab (in Postman or Insomnia).
+Select "JSON" as the format.
+Paste your JSON structure into the json field.
+
+Example of JSON structure for updating products:
+```json
+{
+"ids": [1, 2],
+"price": 50
+}
+```
+Will give the user this response:
+```json
+{
+"message": "Campaign added.",
+"campaign": {
+    "_id": 1,
+    "ids": [1, 2],
+    "price": 50
+}
+}
+```
+
+\*The ids array must be a set of valid product ids from the menu.

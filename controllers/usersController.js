@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 // Creates a JOI schema to validate user input
 const userSchema = joi.object({
   username: joi.string().min(3).max(20).alphanum().required(),
-  password: joi.string().min(3).max(20).required(),
+  password: joi.string().min(3).max(20).required()
 });
 
 // Creates a new user with input validation and errorhandling
@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Creates a new user with hashed password
-    const newUser = { username, password: hashedPassword };
+    const newUser = { username, password: hashedPassword, isAdmin: false };
 
     // Saves new user
     const createdUser = await db.users.insert(newUser);
@@ -68,7 +68,7 @@ const login = async (req, res) => {
     }
 
     // Checks if user exists in database and password is correct
-    global.currentUser = { id: user._id, username: user.username };
+    global.currentUser = { id: user._id, ...user };
 
     // Checks if user already exists in database
     res.status(200).json({
